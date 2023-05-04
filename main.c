@@ -5,6 +5,17 @@
  *      Author: Ahmed
  */
 
+/*
+ *
+ * AUTHOR : Ahmed Salem
+ *
+ * DAte : 5/5/2023
+ *
+ * @breif : Application File for Simple electrical voting system
+ *
+ * */
+
+
 #include"STD_TYPES.h"
 #include"BIT_MATH.h"
 #include"DIO_interface.h"
@@ -23,6 +34,7 @@ u8 user_1Counter = 0 ;
 u8 user_2Counter = 0 ;
 u8 user_3Counter = 0 ;
 
+u8 user;
 u8 WINNER = 0;
 
 void main()
@@ -81,17 +93,35 @@ void main()
 		LCD_VidSendNum(user_3Counter);
 
 
-		/*
-		if( user_1Counter || user_2Counter || user_3Counter == MAX )
+
+		if(WINNER == MAX )
 		{
 			LCD_VidSendCommand(0x01);
 
-			LCD_VidSendString("WINNER IS ");
-			LCD_VidSendNum(WINNER);
+			switch(user)
+			{
+			case 1 :
+				LCD_VidSendString("WINNER IS First ");
+
+			break;
+
+			case 2 :
+				LCD_VidSendString("WINNER IS Second ");
+
+			break;
+
+			case 3 :
+				LCD_VidSendString("WINNER IS Third ");
+
+			break;
+
+			default : LCD_VidSendString("ERRROR");
+
+			}
 
 			break;
 		}
-*/
+
 
 
 	}
@@ -107,6 +137,7 @@ void User_1(void)
 	if(user_1Counter  == MAX )
 	{
 		WINNER = user_1Counter;
+		user = 1;
 	}
 
 }
@@ -119,6 +150,7 @@ void User_2(void)
 	if(user_2Counter  == MAX )
 	{
 			WINNER = user_2Counter;
+			user = 2;
 	}
 
 }
@@ -131,8 +163,8 @@ void User_3(void)
 	if(user_3Counter  == MAX )
 	{
 		WINNER = user_3Counter;
+		user = 3;
 	}
 
 
 }
-
